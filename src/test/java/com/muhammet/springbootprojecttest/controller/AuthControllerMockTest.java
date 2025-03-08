@@ -35,7 +35,8 @@ public class AuthControllerMockTest {
         Mockito.when(authService.registerUser(Mockito.any())).thenReturn(Auth.builder()
                         .id(987L).userName("muhammet").password("123456")
                 .build());
-       // Mockito.when(userProfileService.existUserProfile(Mockito.anyLong())).thenReturn(true);
+        Mockito.doNothing().when(userProfileService).createUserProfile(Mockito.anyLong());
+        //Mockito.doThrow(RuntimeException.class).when(userProfileService).createUserProfile(Mockito.anyLong());
         Mockito.when(authController.register(Mockito.any())).thenReturn(ResponseEntity.ok(true));
 
         ResponseEntity<Boolean> result =  authController.register(dto);

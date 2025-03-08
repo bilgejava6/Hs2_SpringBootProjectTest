@@ -1,11 +1,13 @@
 package com.muhammet.springbootprojecttest.service;
 
+import com.muhammet.springbootprojecttest.entity.Auth;
 import com.muhammet.springbootprojecttest.entity.UserProfile;
 import com.muhammet.springbootprojecttest.repository.UserProfileRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -34,4 +36,15 @@ public class UserProfileService {
     public Boolean existUserProfile(Long authId) {
         return userProfileRepository.existsByAuthId(authId);
     }
+
+    public Optional<UserProfile> getUserProfile(Long authId) {
+        // authId null gelebilir.
+        if(authId == null) throw new RuntimeException("authId is null");
+        // 2 durum var bu id ye ait bilgi vardır - yoktur
+        // Eğer authId bilgisi tekrar ediyor ise bu method çalışır mı?
+        Optional<UserProfile> result = userProfileRepository.findOptionalByAuthId(authId);
+        if(result.isEmpty()) throw new RuntimeException("user profile not found");
+        return  result;
+    }
+
 }
