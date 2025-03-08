@@ -24,4 +24,12 @@ public class AuthService {
     public Optional<Auth> loginUser(LoginRequestDto dto) {
       return authRepository.findOptionalByUserNameAndPassword(dto.userName(),dto.password());
     }
+
+    public Boolean isExistUser(String userName,String password) {
+        return authRepository.existsByUserNameAndPassword(userName,password);
+    }
+
+    public Optional<Auth> getAuthUserNameAndPassword(String userName,String password) {
+        return authRepository.findOptionalByUserNameAndPassword(userName,password);
+    }
 }

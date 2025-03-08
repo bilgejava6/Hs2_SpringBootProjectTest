@@ -30,7 +30,8 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<Boolean> login(@RequestBody LoginRequestDto dto){
        Optional<Auth> auth =  authService.loginUser(dto);
-       if (auth.isEmpty()) throw new RuntimeException("Kullanıcı adı ya da şifre hatalıdır.");
+       if (auth.isEmpty())
+           throw new RuntimeException("Kullanıcı adı ya da şifre hatalıdır.");
        return ResponseEntity.ok(true);
     }
 

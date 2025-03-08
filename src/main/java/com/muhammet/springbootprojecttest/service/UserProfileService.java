@@ -28,4 +28,8 @@ public class UserProfileService {
     public List<UserProfile> getAll() {
         return userProfileRepository.findAll();
     }
+
+    public Boolean existUserProfile(Long authId) {
+        return userProfileRepository.existsByAuthId(authId);
+    }
 }
