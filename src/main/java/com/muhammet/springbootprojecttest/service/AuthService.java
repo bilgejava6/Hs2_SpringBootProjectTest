@@ -2,18 +2,26 @@ package com.muhammet.springbootprojecttest.service;
 
 import com.muhammet.springbootprojecttest.dto.request.LoginRequestDto;
 import com.muhammet.springbootprojecttest.dto.request.RegisterRequestDto;
+import com.muhammet.springbootprojecttest.entity.Auth;
 import com.muhammet.springbootprojecttest.repository.AuthRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class AuthService {
     private final AuthRepository authRepository;
 
-    public void registerUser(RegisterRequestDto dto) {
+    public Auth registerUser(RegisterRequestDto dto) {
+      return  authRepository.save(Auth.builder()
+                        .userName(dto.userName())
+                        .password(dto.password())
+                .build());
     }
 
-    public void loginUser(LoginRequestDto dto) {
+    public Optional<Auth> loginUser(LoginRequestDto dto) {
+      return authRepository.findOptionalByUserNameAndPassword(dto.userName(),dto.password());
     }
 }
