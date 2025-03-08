@@ -18,6 +18,8 @@ public class UserProfileService {
      * @param authId
      */
     public void createUserProfile(Long authId){
+        if (authId != null)
+            throw new RuntimeException("Hata");
         userProfileRepository.save(UserProfile.builder().authId(authId).build());
     }
 
